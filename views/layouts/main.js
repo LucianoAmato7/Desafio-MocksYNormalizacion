@@ -37,7 +37,7 @@ socket.on("productos", (data) => {
   }
 });
 
-function AddProducto(e) {
+function AddProducto() {
   const productoN = {
     title: document.getElementById("nombre").value,
     price: document.getElementById("Precio").value,
@@ -46,6 +46,12 @@ function AddProducto(e) {
   socket.emit("nuevo-producto", productoN);
   return false;
 }
+
+document.getElementById("enviarProd").addEventListener("click", (e)=>{
+  e.stopPropagation()
+  e.preventDefault()
+  AddProducto()
+})
 
 // CENTRO DE MENSAJES
 socket.on("mensajes", (data) => {
@@ -101,7 +107,7 @@ function Desnormalize(data) {
   return denormalizedBlogpost;
 }
 
-function AddMensaje(e) {
+function AddMensaje() {
   const mensaje = {
     author: {
       id: document.getElementById("enviarEmail").value,
@@ -117,3 +123,9 @@ function AddMensaje(e) {
   socket.emit("nuevo-mensaje", mensaje);
   return false;
 }
+
+document.getElementById("btnMsj").addEventListener("click", (e)=>{
+  e.stopPropagation()
+  e.preventDefault()
+  AddMensaje()
+})

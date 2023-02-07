@@ -6,7 +6,7 @@
         <h1 style="color:blue;">Ingrese datos</h1>
         <br/>
 
-        <form onsubmit="return AddProducto(this)">
+        <form>
 
             <div class="form-group">
                 <label for="nombre"><b>Nombre</b></label>
@@ -23,8 +23,8 @@
                 <input type="url" id="URLImagen" class="form-control" name="thumbnail" required>
             </div>
 
-            <input type="submit" class="btn btn-success mt-3" id="enviar" value="Enviar">
-        
+            <input type="submit" class="btn btn-success mt-3" id="enviarProd" value="Enviar">
+
         </form>
 
         <br/>
@@ -39,25 +39,26 @@
 
         <h1 style="color:blue;">Centro de Mensajes</h1>
         <h2 style="color:blue;" id="porcentaje_compresion"></h2>
-        <form onsubmit="return AddMensaje(this)">
-            <input id="enviarEmail" type="email" class="my-3 w-50" placeholder='Email' required>
+        <form>
 
-            <input id="enviarNombre" type="text" class="my-3 w-50" placeholder='Nombre' required>
+            <input id="enviarEmail" type="email" class="my-3 w-50" placeholder='email' required>
 
-            <input id="enviarApellido" type="text" class="my-3 w-50" placeholder='Apellido' required>
+            <input id="enviarNombre" type="text" class="my-3 w-50" placeholder='nombre' required>
 
-            <input id="enviarEdad" type="number" class="my-3 w-50" placeholder='Edad' required>
+            <input id="enviarApellido" type="text" class="my-3 w-50" placeholder='apellido' required>
 
-            <input id="enviarAlias" type="text" class="my-3 w-50" placeholder='Alias' required>
+            <input id="enviarEdad" type="number" class="my-3 w-50" placeholder='edad' required>
 
-            <input id="enviarAvatar" type="url" class="my-3 w-50" placeholder='Avatar'>
+            <input id="enviarAlias" type="text" class="my-3 w-50" placeholder='alias' required>
+
+            <input id="enviarAvatar" type="url" class="my-3 w-50" placeholder='avatar'>
 
             <div id="contenedorMsj" class="mb-3 border-top border-dark pt-3"></div>
 
-            <input id="enviarMsj" class="mr-2" type="text" placeholder="ingresá un mensaje..." required>
-            <span>
-                <input type="submit" class="bg-primary text-white border rounded p-2" id="btnEnviarMsj" value="Enviar!">
-            </span>
+            <input type="text" id="enviarMsj" class="mr-2" placeholder="ingresá un mensaje..." required>
+                
+            <button type="submit" class="bg-primary text-white border rounded" id="btnMsj">Enviar</button>
+            
         </form>
     </div>
 </div>
