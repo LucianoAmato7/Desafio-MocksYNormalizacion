@@ -1,8 +1,12 @@
+import {
+  normalize,
+  schema,
+  denormalize,
+} from "https://cdn.jsdelivr.net/npm/normalizr@3.6.2/+esm";
+
 let socket = io.connect();
-let { normalize, schema, denormalize } = require('normalizr');
 
 // VISTA DE PRODUCTOS
-
 socket.on("productos", (data) => {
   if (data) {
     document.getElementById("vistaContainer").innerHTML = `
@@ -26,7 +30,7 @@ socket.on("productos", (data) => {
                     </tr>`
                 )}
             </table>
-        </div>`
+        </div>`;
   } else {
     document.getElementById("vistaContainer").innerHTML =
       '<h3 class="alert alert-danger">No se encontraron productos</h3>';
@@ -44,36 +48,58 @@ function AddProducto(e) {
 }
 
 // CENTRO DE MENSAJES
-
 socket.on("mensajes", (data) => {
+  const normalizedData = NormalizedData(data);
+  const desnormalizedData = Desnormalize(data);
 
+  let originalLength = JSON.stringify(data).length;
+  let normalizedLength = JSON.stringify(normalizedData).length;
+  let desnormalizedLegth = JSON.stringify(desnormalizedData).length;
+
+  console.log(`Data original:`);
+  console.log(originalLength);
   console.log(`Data normalizada con normalizr:`);
-  console.log(data);
-  console.log('Data desnomalizada con normalizr:');
-  const DesnormalizedData = Desnormalizacion(data)
-  console.log(DesnormalizedData);
-  
-  document.getElementById("contenedorMsj").innerHTML = 
-    DesnormalizedData.mensajes.map(
+  console.log(normalizedData);
+  console.log(normalizedLength);
+  console.log("Data desnomalizada con normalizr:");
+  console.log(desnormalizedData);
+  console.log(desnormalizedLegth);
+
+  let porcentajeCompresion = 100 - (normalizedLength / originalLength) * 100;
+
+  document.getElementById(
+    "porcentaje_compresion"
+  ).innerHTML = `Porcentaje de compresión: ${porcentajeCompresion.toFixed(2)}%`;
+
+  document.getElementById("contenedorMsj").innerHTML = data
+    .map(
       (msj) =>
         `<span class="text-primary"><strong>${msj.author.id}</strong></span>
         <span class="text-danger">[ ${msj.fyh} ]</span>: 
         <span class="text-success fst-italic">${msj.text}</span>
-        <span class="text-success fst-italic"><img style="width: 4%" class="ml-2" src="${msj.author.avatar}" alt="${msj.author.name} avatar"></span>`
-
+        <span class="text-success fst-italic"><img style="width: 6%" class="ml-2" src="${msj.author.avatar}" alt="${msj.author.name} avatar"></span>`
     )
     .join("<br>");
 });
 
-
-function Desnormalizacion(data) {
-  const messages = {id: "mensajesData", mensajes: data}
-  const authorSchema = new schema.Entity('author');
+function NormalizedData(data) {
+  const messages = { id: "mensajesData", mensajes: data };
+  const authorSchema = new schema.Entity("author");
   const normalizedData = normalize(messages, authorSchema);
-  const denormalizedBlogpost = denormalize(normalizedData.result, authorSchema, normalizedData.entities);
-  return denormalizedBlogpost
+  return normalizedData;
 }
 
+function Desnormalize(data) {
+  const messages = { id: "mensajesData", mensajes: data };
+  const authorSchema = new schema.Entity("author");
+  const normalizedData = normalize(messages, authorSchema);
+  const denormalizedBlogpost = denormalize(
+    normalizedData.result,
+    authorSchema,
+    normalizedData.entities
+  );
+  return denormalizedBlogpost;
+}
 
 function AddMensaje(e) {
   const mensaje = {
@@ -83,7 +109,7 @@ function AddMensaje(e) {
       apellido: document.getElementById("enviarApellido").value,
       edad: document.getElementById("enviarEdad").value,
       alias: document.getElementById("enviarAlias").value,
-      avatar: document.getElementById("enviarAvatar").value
+      avatar: document.getElementById("enviarAvatar").value,
     },
     fyh: new Date().toLocaleString(),
     text: document.getElementById("enviarMsj").value,

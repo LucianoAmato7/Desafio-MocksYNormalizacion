@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { normalize, schema } from "normalizr";
 
 const URLMongoDB = "mongodb+srv://coderhouse:coderhouse@coderhouse-backend.iwu4lzw.mongodb.net/ecommerce?retryWrites=true&w=majority";
 
@@ -66,18 +65,6 @@ class ApiMsjMongoDB {
       });
     }
   }
-
-  NormalizedData(data){
-
-    const messages = {id: "mensajesData", mensajes: data}
-
-    const authorSchema = new schema.Entity('author');
-
-    const normalizedData = normalize(messages, authorSchema);
-
-    return normalizedData
-  }
-
 }
 
 export default ApiMsjMongoDB;

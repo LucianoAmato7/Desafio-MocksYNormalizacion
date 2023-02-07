@@ -1,4 +1,4 @@
-<script src="./main.js"></script>
+<script type="module" src="./main.js"></script>
 
 <div class="container mt-3">
     <div class="jumbotron">
@@ -40,17 +40,17 @@
         <h1 style="color:blue;">Centro de Mensajes</h1>
         <h2 style="color:blue;" id="porcentaje_compresion"></h2>
         <form onsubmit="return AddMensaje(this)">
-            <input id="enviarEmail" type="email" class="my-3 w-50" placeholder='Email - (Ej: "luciano@gmail.com")' required>
+            <input id="enviarEmail" type="email" class="my-3 w-50" placeholder='Email' required>
 
-            <input id="enviarNombre" type="text" class="my-3 w-50" placeholder='Nombre - (Ej: "Luciano")' required>
+            <input id="enviarNombre" type="text" class="my-3 w-50" placeholder='Nombre' required>
 
-            <input id="enviarApellido" type="text" class="my-3 w-50" placeholder='Apellido - (Ej :"Amato")' required>
+            <input id="enviarApellido" type="text" class="my-3 w-50" placeholder='Apellido' required>
 
-            <input id="enviarEdad" type="number" class="my-3 w-50" placeholder='Edad - (Ej: "25")' required>
+            <input id="enviarEdad" type="number" class="my-3 w-50" placeholder='Edad' required>
 
-            <input id="enviarAlias" type="text" class="my-3 w-50" placeholder='Alias - (Ej: "Lucho")' required>
+            <input id="enviarAlias" type="text" class="my-3 w-50" placeholder='Alias' required>
 
-            <input id="enviarAvatar" type="url" class="my-3 w-50" placeholder='Avatar - (Ej: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png")'>
+            <input id="enviarAvatar" type="url" class="my-3 w-50" placeholder='Avatar'>
 
             <div id="contenedorMsj" class="mb-3 border-top border-dark pt-3"></div>
 

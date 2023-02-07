@@ -43,21 +43,18 @@ apiProdsSQL.crearTablaProds();
 app.get("/", (req, res) => {
   res.render("formulario");
   io.on("connection", (socket) => {
-  
     console.log("Nuevo cliente conectado");
-    
+
     //MSJS
-    
+
     apiMsjMongoDB.ListarMsjs().then((msjs) => {
-      //SE DESNORMALIZA EN EL FRONT PARA PODER CONFIGURAR LA VISTA
-      let normalizedData = apiMsjMongoDB.NormalizedData(msjs)      
-      socket.emit("mensajes", normalizedData);
+      socket.emit("mensajes", msjs);
     });
-    
+
     socket.on("nuevo-mensaje", (data) => {
       apiMsjMongoDB
-      .guardarMsj(data)
-      .then(() => {
+        .guardarMsj(data)
+        .then(() => {
           console.log("Mensaje cargado en la base de datos");
           return apiMsjMongoDB.ListarMsjs();
         })
@@ -66,13 +63,13 @@ app.get("/", (req, res) => {
           console.log("Vista de mensajes actualizada");
         });
     });
-      
+
     //PRODS
-  
+
     apiProdsSQL.ListarProds().then((prods) => {
       socket.emit("productos", prods);
     });
-  
+
     socket.on("nuevo-producto", (data) => {
       apiProdsSQL
         .guardarProd(data)
@@ -88,12 +85,11 @@ app.get("/", (req, res) => {
   });
 });
 
-//MOCK - FAKE PRODS    
+//MOCK - FAKE PRODS
 app.get("/api/productos-test", (req, res) => {
-  const productosFake = apiProdsSQL.FakeProds()
-  res.render("productos-test", {productosFake}); 
+  const productosFake = apiProdsSQL.FakeProds();
+  res.render("productos-test", { productosFake });
 });
-
 
 //SERVIDOR
 // ----------------------------------------------|
