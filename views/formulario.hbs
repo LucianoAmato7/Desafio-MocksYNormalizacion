@@ -1,0 +1,63 @@
+<script src="./main.js"></script>
+
+<div class="container mt-3">
+    <div class="jumbotron">
+
+        <h1 style="color:blue;">Ingrese datos</h1>
+        <br/>
+
+        <form onsubmit="return AddProducto(this)">
+
+            <div class="form-group">
+                <label for="nombre"><b>Nombre</b></label>
+                <input type="text" id="nombre" class="form-control" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Precio"><b>Precio</b></label>
+                <input type="number" id="Precio" class="form-control" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="URLImagen"><b>URL imagen</b></label>
+                <input type="url" id="URLImagen" class="form-control" name="thumbnail" required>
+            </div>
+
+            <input type="submit" class="btn btn-success mt-3" id="enviar" value="Enviar">
+        
+        </form>
+
+        <br/>
+
+        <div class="border-top border-dark mt-3 pt-5" id="vistaContainer"></div>
+
+    </div>
+</div>    
+
+<div class="container">
+    <div class="jumbotron">
+
+        <h1 style="color:blue;">Centro de Mensajes</h1>
+        <h2 style="color:blue;" id="porcentaje_compresion"></h2>
+        <form onsubmit="return AddMensaje(this)">
+            <input id="enviarEmail" type="email" class="my-3 w-50" placeholder='Email - (Ej: "luciano@gmail.com")' required>
+
+            <input id="enviarNombre" type="text" class="my-3 w-50" placeholder='Nombre - (Ej: "Luciano")' required>
+
+            <input id="enviarApellido" type="text" class="my-3 w-50" placeholder='Apellido - (Ej :"Amato")' required>
+
+            <input id="enviarEdad" type="number" class="my-3 w-50" placeholder='Edad - (Ej: "25")' required>
+
+            <input id="enviarAlias" type="text" class="my-3 w-50" placeholder='Alias - (Ej: "Lucho")' required>
+
+            <input id="enviarAvatar" type="url" class="my-3 w-50" placeholder='Avatar - (Ej: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png")'>
+
+            <div id="contenedorMsj" class="mb-3 border-top border-dark pt-3"></div>
+
+            <input id="enviarMsj" class="mr-2" type="text" placeholder="ingresá un mensaje..." required>
+            <span>
+                <input type="submit" class="bg-primary text-white border rounded p-2" id="btnEnviarMsj" value="Enviar!">
+            </span>
+        </form>
+    </div>
+</div>
